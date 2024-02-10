@@ -1,8 +1,12 @@
+import { useState } from "react";
 import "./App.css";
-
+import Counter from "./components/Counter";
 import Header from './components/Header'
+import Products from "./components/Products";
 
 function App() {
+
+  const [show,setShow] = useState(true)
   let name = "Test";
   let person = {
     name: "Test",
@@ -13,7 +17,7 @@ function App() {
 
   const style1 = {
     color: 'red',
-    backgroundColor:'blue'
+    backgroundColor: 'blue'
   }
 
   let students = [
@@ -32,20 +36,27 @@ function App() {
   return (
     <>
       <Header name={name} age='30' />
-      <h1>Hello , {name}</h1>
-      <h2>Hello ,{getPerson("Test 2")}</h2>
-      {b ? <p style={style1}>{person.name}</p> : <p className="age">{person.age}</p>}
-      {b && <p>True</p>}
-        {students.map((s,i) => {
-          return (
-              <ul key={i}>
-              <li>{s.name}</li>
-              <li>{s.age}</li>
-              </ul>
-          )
-        })}
+      <Counter PropName={name} />
+      <button onClick={()=>setShow(!show)}>Update Show</button>
+      {show && <Products PropName={name} />}
+       {/* <h1 > Hello, { name }</h1>
+        <h2>Hello ,{getPerson("Test 2")}</h2>
+  { b ? <p style={style1}>{person.name}</p> : <p className="age">{person.age}</p> }
+  { b && <p>True</p> }
+  {
+    students.map((s, i) => {
+      return (
+        <ul key={i}>
+          <li>{s.name}</li>
+          <li>{s.age}</li>
+        </ul>
+      )
+    })
+  }
       <img /> 
-      <button onClick={()=>test()} >Click Me</button>
+      <button onClick={()=>test()} >Click Me</button>  */}
+
+
     
     </>
   );

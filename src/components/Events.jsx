@@ -2,10 +2,15 @@ import Event from "./Event";
 import events from "../events.json"
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 function Events() {
 
     const [showWelcome,setShowWelcome] = useState(true)
+    const [SearchParams,SetSearchParams]=useSearchParams({});
     useEffect(() => {
+        console.log(SearchParams.get("name")) 
+        console.log(SearchParams.get("id"))
+        
         setTimeout(() => {
             setShowWelcome(false)
         },3000)

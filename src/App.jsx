@@ -1,13 +1,21 @@
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 import "./App.css";
+import  { lazy } from 'react';
+
 import Counter from "./components/Counter";
-import Header from './components/Header'
-import Products from "./components/Products";
-import Events from "./components/Events";
+const Header = React.lazy(()=>import( './components/Header')) ;
+const NavigationBar = lazy(() => import('./components/NavigationBar'));
+const Products = React.lazy(()=>import( './components/Products')) ;
+const Events = React.lazy(()=>import( './components/Events')) ;
+const EventDetails = React.lazy(()=>import( './components/EventDetail')) ;
+import { Route, Router, Routes } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/Users";
 
 function App() {
 
   const [show,setShow] = useState(true)
+  const [role,setRole]=useState()
   let name = "Test";
   let person = {
     name: "Test",
@@ -55,13 +63,39 @@ function App() {
     })
   }
       <img /> 
-      <button onClick={()=>test()} >Click Me</button>  */}
+      <button onClick={()=>test()} >Click Me</button>  */
+      }
+      <Suspense fallback={<h1>loading</h1>}>
+<Header/>
+ 
+      <Routes>
+        {/*
+      {role !=='admin' ?
+      (
+        <Route path="/admin" element ={<Dashboard/>}>
+          <Route path="users" element={<Users/>}/>
+        </Route>
+      )
+    :     */}
+      (
+         <>
+ 
+   
+  
+         <Route path="events" element={<Events />} />
+      <Route path="events/:name" element={<EventDetails/>} />
 
-      <Events />
+        <Route path="/products" element={<Products/>}/>
+        <Route path="/counter" element={<Counter/>}/>
+        </>
+      )
+      <Route path="*" element={<h1>notfound</h1>}/>
+      </Routes>
 
-    
+    </Suspense>
     </>
   );
-}
+  
+      }
 
 export default App;

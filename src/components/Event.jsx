@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-
+import { Link, NavLink } from "react-router-dom";
 function Event(props) {
 
     const [event, setEvent] = useState(props.event)
@@ -14,8 +14,11 @@ function Event(props) {
         <Card>
             <Card.Img variant="top" src={src} height={250}/>
             <Card.Body>
-                <Card.Title>{event.title}</Card.Title>
-                <Card.Text>
+
+            <Card.Title>
+                <NavLink to={`/events/${event.name}`} style ={({isActive})=>{{textDecoration : isActive ? 'underline':'none'}} }>{event.name}</NavLink>
+                </Card.Title>               
+             <Card.Text>
                     Price : {event.price}
                 </Card.Text>
                 <Card.Text>
